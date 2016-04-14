@@ -4,15 +4,44 @@
 	<label for="age">Age:</label> <br><input type = "text" name ="age" size="5"><br>
 	<label for="pass">TestPass</label><br><input type = "password" name="password"><br>
 	<label for="text">Text3</label><br><input type ="text" name="mytext" size=3 maxlength=5><br>
-	<br><label for="radioButton"></label><input type = "radio" name="sex" value = M>Male
+	<br>
+	<label for="radioButton"></label><input type = "radio" name="sex" value = M>Male
 	<label for="radioButton"></label><input type = "radio" name="sex" value = F>Female
-	<br><label for="radioButton2"></label><input type = "radio" name="OS" value = "Windows">Windows;
+	<br>
+	<label for="radioButton2"></label><input type = "radio" name="OS" value = "Windows">Windows;
 	<label for ="radioButton2></label><input type = "radio" name="OS" value = "Linux">Linux;
 	<label for =|radioButton2></label><input type ="radio" name="OS" value = "Mac OS">Mac;
- 	<br><br>
+ 	<br>
+ 	<br>
 	<label for="checkbox"></label><input type = "checkbox" name="checkB" checked value=yes>I agree
+	
 	<input type = "submit" value="Submit">
+	
+	<select name="year" size = 1>
+		<option value=2016>2016</option>
+		<opiton value=2015>2015</opiton>
+		<option value=2014>2014</option>
+		<option value=2013>2013</option>
+		<option value=2012>2012</option>
+		<option value=2011>2011</option>
+	</select>
+	
+	<select name="year[]" size=3 multiple>
+		<option value=2016>2016</option>
+		<option value=2015>2015</option>
+		<option value=2014>2014</option>
+		<option value=2013>2013</option>
+		<option value=2012>2012</option>
+
+	</select> 
+	<br>
+	<br>
+	
+	<input type=BUTTON VALUE="BACKSPACE" ONCLICK=\"History.back(-1)\">
+	<br>
+	
 </form>
+
 <?php
 
 error_reporting( E_ALL );
@@ -29,32 +58,29 @@ ini_set( 'display_errors', '1' );
 // var_dump($username);
 // echo 'Denis';
 
-
-
-
 $name 		= $_GET['name']; 
 $age  		= $_GET['age'];
 $checkBox 	= $_REQUEST['checkB'];
 
 
-// if ( !isset( $_GET['sex']) )
-// {
-// 	die('please specify your sex');
-// }
-// else 
-// 	switch ( $_GET['sex'] )
-// 	{
-// 		case 'M':
-// 			print 'Male ';
-// 			break;
-// 		case 'F':
-// 			print 'Female ';
-// 			break;
+if ( !isset( $_GET['sex']) )
+{
+	die('please specify your sex');
+}
+else 
+	switch ( $_GET['sex'] )
+	{
+		case 'M':
+			print 'Male ';
+			break;
+		case 'F':
+			print 'Female ';
+			break;
 			
-// 		default:
-// 			print 'choosed M/F, please ';
-// 			break;
-// 	}
+		default:
+			print 'choosed M/F, please ';
+			break;
+	}
 
 switch ( isset( $_GET['OS']) )
 {

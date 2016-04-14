@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Form</title>
+	
+	<script language="JavaScript">
+		function checkName()
+		{
+			if( document.Form.userName.value=='')
+			{
+				alert('Username is required');
+				return false;
+			
+			}else 
+			{
+				return true;
+			}
+		
+		}
+		
+	</script>
+	
+	
+	</head>
+	
+	<body>
+		<form name="Form" action="index.php" onSubmit="return checkName()">
+			<label for="firstName">FirstName</label><input type="text" name="userName">
+			<input type="submit" name="Submit" value="Enter">
+		</form>
+	</body>
+
+</html>
