@@ -1,116 +1,122 @@
-
-<form action = "index.php" method = "GET">
-	<label for="name">Name:</label><br><input type = "text" name ="name"><br>
-	<label for="age">Age:</label> <br><input type = "text" name ="age" size="5"><br>
-	<label for="pass">TestPass</label><br><input type = "password" name="password"><br>
-	<label for="text">Text3</label><br><input type ="text" name="mytext" size=3 maxlength=5><br>
-	<br>
-	<label for="radioButton"></label><input type = "radio" name="sex" value = M>Male
-	<label for="radioButton"></label><input type = "radio" name="sex" value = F>Female
-	<br>
-	<label for="radioButton2"></label><input type = "radio" name="OS" value = "Windows">Windows;
-	<label for ="radioButton2></label><input type = "radio" name="OS" value = "Linux">Linux;
-	<label for =|radioButton2></label><input type ="radio" name="OS" value = "Mac OS">Mac;
- 	<br>
- 	<br>
-	<label for="checkbox"></label><input type = "checkbox" name="checkB" checked value=yes>I agree
-	
-	<input type = "submit" value="Submit">
-	
-	<select name="year" size = 1>
-		<option value=2016>2016</option>
-		<opiton value=2015>2015</opiton>
-		<option value=2014>2014</option>
-		<option value=2013>2013</option>
-		<option value=2012>2012</option>
-		<option value=2011>2011</option>
-	</select>
-	
-	<select name="year[]" size=3 multiple>
-		<option value=2016>2016</option>
-		<option value=2015>2015</option>
-		<option value=2014>2014</option>
-		<option value=2013>2013</option>
-		<option value=2012>2012</option>
-
-	</select> 
-	<br>
-	<br>
-	
-	<input type=BUTTON VALUE="BACKSPACE" ONCLICK=\"History.back(-1)\">
-	<br>
-	
-</form>
-
 <?php
 
 error_reporting( E_ALL );
 ini_set( 'display_errors', '1' );
 
-
-//echo $_GET['username']
-//$username = "Denis";
-
-//echo PHP_DEBUG;
-//echo PHP_VERSION;
-
-// print $username;
-// var_dump($username);
-// echo 'Denis';
-
-$name 		= $_GET['name']; 
-$age  		= $_GET['age'];
-$checkBox 	= $_REQUEST['checkB'];
-
-
-if ( !isset( $_GET['sex']) )
-{
-	die('please specify your sex');
-}
-else 
-	switch ( $_GET['sex'] )
+class DBconnect
+{	
+	private $user = 'root';
+	private $pass = '';
+	
+	/*
+	 * @var array $levels
+	 */
+	public $levels;
+	
+	public function createConnection()
 	{
-		case 'M':
-			print 'Male ';
-			break;
-		case 'F':
-			print 'Female ';
-			break;
+		
+		$sql = 'SELECT * FROM users';
+		
+		try {
+			$dbh = new PDO('mysql:host=localhost;dbname=bookdb;',$this->user, $this->pass);
+		
+			$stmt = $dbh->prepare( $sql );
+			$stmt->execute();
+		
+		
+			if ( $stmt )
+			{
+				$result = $stmt->fetchAll();
+			}
+			return $result;
+									
+		}catch ( PDOException $e)
+			{
+				print "connection failed " . $e->getMessage();
+			}		
+		// up to here i have got connection with the database
+		//i will follow one example to try to extract datas from the database 
+		
+// 			$tableData = array(
+// 					$_POST['ID'],
+// 					$_POST['USERNAME'],
+// 					$_POST['EMAIL'],
+// 					$_POST['STATUS']
+// 								);
 			
-		default:
-			print 'choosed M/F, please ';
-			break;
+			
+	}
+	
+	
+	/**
+	 * @brief  start a little bit the udem online course that is why this array have appeared and in a function coz no other way to :)
+	 */
+	public function createArray()
+	{
+		$levels = array(1,2,3);
+		
+		print "Using var_dump shows " . var_dump( $levels );
+	    print_r( $levels );
+	}
+	
+	
+	
+	/**
+	 * @brief function to divide rows and arrays coz for any reasons it is combining them.... 
+	 */
+	public function hi()
+	{
+		print 'opppalyankaaaa';
 	}
 
-switch ( isset( $_GET['OS']) )
-{
-	case '1':
-		print 'Windows ';
-		break;
+	/**
+	 * @brief continuing with the udem, that is why this array appeared and will be executed
+	 */
+	public function createSecondArray()
+	{	
+		$levels1 = array(
+				5 => 'Level 1',
+				6 => 'Level 2',
+				7 => 'Level 3'
+		);
+		print_r( $levels1 );
+	}
+	
+	public function createAssotiativeArray()
+	{
+		$neshtoSi = array(
+			1 => array(
+					'name' => 'Level 1', 
+					'desc' => 'This is the first level'
+						),
+			2 => array(
+					'name' => 'Level 2',
+					'desc' => 'This is the second level'
+			),
+			3 => array(
+					'name' => 'Level 3',
+					'desc' => 'This is the third level'
+			)
+			);
 		
-	case '2':
-		print 'Linux ';
-		break;
-		
-	case '3':
-		print 'Mac ';
-		break;
-		
-	default: Print 'Choose OS ';
-		break;
+		print_r($neshtoSi);
+	}
+			
 }
+$db = new DBconnect();
+$db->createConnection();
+var_dump($db->createConnection());
+//$result = $db->createConnection();
+//var_dump($result);
+echo "<p> Records in result: " . 'mysql_num_rows( $result )';
+echo "<p><table border = 1 width = 100%>";
+echo '<pre>', $db->createArray() , '</pre>';
+//$db->hi();
+echo '<pre>', $db->createSecondArray(), '<pre>';
+//echo '<pre>', print_r($neshtoSi),'</pre>';
+//$db->createAssotiativeArray();
+echo '<pre>', print_r( $db->createAssotiativeArray()), '</pre>';
 
- if( isset ( $name) && isset( $age ) && isset( $checkBox) &&!empty( $name ) &&!empty ( $age ) &&!empty( $checkBox ) )
-{
-	echo 'I am ' .$name . ' and I am ' . $age . ' years old ';
-}else 
-{
-	echo 'Please write something';
-}
- 
-echo 'I am ' .$name . ' and I am ' . $age . ' years old ';
 
-
-echo $_GET['name'];
-echo $_GET['age'];
 
