@@ -1,0 +1,124 @@
+<?php
+class db {
+
+// параметры подключени€ к серверу
+// нужно, чтобы они были открытыми (public),
+// чтобы к ним был доступ из основного сценари€
+public $server;
+public $user;
+public $password;
+public $dbname;
+public $charset;
+// флаг подключени€: если true - соединение установлено, Ѕƒ выбрана
+public $connected;
+// дескриптор соединени€, он должен быть приватным,
+// поскольку соединение создано объектом, следовательно,
+// и должно быть разорвано тоже объектом
+private $link;
+
+// свойства результата
+public $result;
+public $rows;
+public $affected_rows;
+public $last_error;
+
+
+function __construct() {
+    $this->server = 'localhost';    // им€ узла
+    $this->user = 'root';           // им€ пользовател€
+    $this->password = '';           // пароль
+    $this->dbname = 'test';         // база данных
+    $this->charset = 'cp1251';      // кодировка
+}
+
+function __destruct() {
+   @mysql_close($this->link);
+}
+
+
+function connect() {
+
+  $this->connected = true;   // считаем, что соединение установлено, но в случае ошибки сбрасываем флаг
+  $this->link = @mysql_connect($this->server, $this->user, $this->password);
+  $this->last_error = mysql_errno($this->link);
+  // если последн€€ ошибка <> 0, то выводим сообщение об ошибке подключени€,
+  // а также сразу вызываем функцию mysql_error(), вывод€ющую подробное описание ошибки
+  if ($this->last_error > 0) {
+    $this->connected = false;
+    echo "Can't connect to server <br>". mysql_error($this->link);
+  }
+  else {
+    // ошибок при подключении нет, выбираем Ѕƒ
+    @mysql_select_db($this->dbname, $this->link);
+    $this->last_error = mysql_errno($this->link);
+    if ($this->last_error > 0) {
+     $this->connected = false;
+     echo "Can't select db ".$this->dbname ."<br>Select another database and try again<br>" . mysql_error($this->link);
+     }
+   }
+   
+   // пытаемс€ установить кодировку
+   $query = "SET NAMES " . $this->charset;
+   @mysql_query($query, $this->link);
+}
+
+function query($q) {
+
+  // выполн€ем запрос
+  $this->result = @mysql_query($q, $this->link);
+  $this->last_error = mysql_errno($this->link);
+  
+  // произошла ошибка, выводим ее описание
+  if ($this->last_error > 0) {
+    echo mysql_error($this->link);
+    }
+  else {
+  // ошибки нет, заполн€ем пол€ класса
+  $this->rows = mysql_num_rows($this->result);
+  $this->affected_rows = mysql_affected_rows($this->link);
+  }
+
+
+}
+
+function silent($q) {
+// результат запроса не помещаетс€ в $this->result
+// поскольку результат уничтожаетс€, то поле $this->rows устанавливаетс€ в 0
+@mysql_query($q, $this->link);
+$this->rows = 0;
+// далее, как обычно, анализ ошибки
+$this->last_error = mysql_errno($this->link);
+// произошла ошибка
+  if ($this->last_error > 0) {
+    echo mysql_error($this->link);
+    }
+  else   
+  // ошибки нет, устанавливаем поле affected_rows
+  // это поле нужно устанавливать, поскольку запросы DELETE, UPDATE, INSERT
+  // и другие подобные им не возвращают строки результата, но примен€ютс€ к запис€м
+  // таблицы и важно знать, к скольким запис€м они применены
+  $this->affected_rows = mysql_affected_rows($this->link);
+}
+ 
+} 
+
+$db1 = new db;
+$db1->server = "localhost";
+$db1->user = "root";
+$db1->password = "";
+$db1->dbname = "test";
+
+$db1->connect();
+
+// если подключено, начинаем работать с базой данных
+if ($db1->connected) {
+
+// делаю выборку из таблицы users
+$db1->query('select * from users');
+echo "Rows in result: " . $db1->rows;
+}
+
+// отключаюсь от сервера
+unset($db1);
+
+?>

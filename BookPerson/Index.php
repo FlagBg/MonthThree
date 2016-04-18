@@ -2,6 +2,8 @@
 
 error_reporting( E_ALL );
 ini_set( 'display_errors', '1' );
+//INI_SET( "include_path", "D:/projects/Month3/MonthThree/Smarty/libs);
+
 
 class DBconnect
 {	
@@ -55,8 +57,9 @@ class DBconnect
 	public function createArray()
 	{
 		$levels = array(1,2,3);
-		
-		print "Using var_dump shows " . var_dump( $levels );
+	
+		print "Using var_dump shows ";
+		var_dump( $levels );
 	    print_r( $levels );
 	}
 	
@@ -100,22 +103,23 @@ class DBconnect
 			)
 			);
 		
-		print_r($neshtoSi);
+		print_r( $neshtoSi );
 	}
 			
 }
 $db = new DBconnect();
 $db->createConnection();
+$db->createArray();
 var_dump($db->createConnection());
-//$result = $db->createConnection();
-//var_dump($result);
+$result = $db->createConnection();
+var_dump($result);
 echo "<p> Records in result: " . 'mysql_num_rows( $result )';
 echo "<p><table border = 1 width = 100%>";
 echo '<pre>', $db->createArray() , '</pre>';
-//$db->hi();
+$db->hi();
 echo '<pre>', $db->createSecondArray(), '<pre>';
-//echo '<pre>', print_r($neshtoSi),'</pre>';
-//$db->createAssotiativeArray();
+echo '<pre>', print_r($neshtoSi),'</pre>';
+$db->createAssotiativeArray();
 echo '<pre>', print_r( $db->createAssotiativeArray()), '</pre>';
 
 
