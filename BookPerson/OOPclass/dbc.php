@@ -74,7 +74,7 @@ class dbc
 		if ( $this->last_error > 0 )
 		{
 			$this->connected = false;
-			echo "Can't connect to SErver" . mysql_error( $this->link );		
+			echo "Can't connect to Sårver" . mysql_error( $this->link );		
 		}
 			/**
 			 * @brief  there is no errors for the connection thaan we choose DB

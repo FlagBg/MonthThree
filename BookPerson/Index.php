@@ -15,19 +15,20 @@ class DBconnect
 	 */
 	public $levels;
 	
-	public function createConnection()
+	public function createConnection(  )//$dbh
 	{
 		
-		$sql = 'SELECT * FROM users';
-		
 		try {
-			$dbh = new PDO('mysql:host=localhost;dbname=bookdb;',$this->user, $this->pass);
-		
+			$sql = 'SELECT * FROM users';
+			
+			$dbh = new PDO('mysql:host=localhost;dbname=bookdb;',
+						$this->user, $this->pass);
+			//die('asdfa');
 			$stmt = $dbh->prepare( $sql );
-			$stmt->execute();
-		
-		
-			if ( $stmt )
+			
+			$stmtResult = $stmt->execute();
+			
+			if ( $stmtResult )
 			{
 				$result = $stmt->fetchAll();
 			}
@@ -46,9 +47,7 @@ class DBconnect
 // 					$_POST['EMAIL'],
 // 					$_POST['STATUS']
 // 								);
-			
-			
-	}
+			}
 	
 	
 	/**
@@ -86,7 +85,7 @@ class DBconnect
 		print_r( $levels1 );
 	}
 	
-	public function createAssotiativeArray()
+	public function createAssotiativeArray(  )
 	{
 		$neshtoSi = array(
 			1 => array(
@@ -101,26 +100,29 @@ class DBconnect
 					'name' => 'Level 3',
 					'desc' => 'This is the third level'
 			)
-			);
+		);
 		
-		print_r( $neshtoSi );
 	}
 			
 }
 $db = new DBconnect();
+//$sql = 'SELECT * FROM users';
 $db->createConnection();
-$db->createArray();
+
+
+
+//$db->createArray();
 var_dump($db->createConnection());
 $result = $db->createConnection();
 var_dump($result);
-echo "<p> Records in result: " . 'mysql_num_rows( $result )';
-echo "<p><table border = 1 width = 100%>";
-echo '<pre>', $db->createArray() , '</pre>';
-$db->hi();
-echo '<pre>', $db->createSecondArray(), '<pre>';
-echo '<pre>', print_r($neshtoSi),'</pre>';
-$db->createAssotiativeArray();
-echo '<pre>', print_r( $db->createAssotiativeArray()), '</pre>';
+// echo "<p> Records in result: " . 'mysql_num_rows( $result )';
+// echo "<p><table border = 1 width = 100%>";
+// echo '<pre>', $db->createArray() , '</pre>';
+// $db->hi();
+// echo '<pre>', $db->createSecondArray(), '<pre>';
+// //echo '<pre>', print_r( $neshtoSi ),'</pre>';
+// $db->createAssotiativeArray();
+// echo '<pre>', print_r( $db->createAssotiativeArray()), '</pre>';
 
 
 
