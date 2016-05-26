@@ -1,0 +1,80 @@
+
+
+Cyclonis:
+		searching : 	SessionAuthenctiocationListener;
+		APP\MODULE\MAIN\SERVICE\SECURITY\LISTENER
+		EXISTING:
+		1.SessionAuthenticationListener ADDED!!!!!
+			2. AuthenticationListener.php exist
+		3. AnonymousAuthencticationListenr.php	exist
+
+match@!
+CyclonisApi
+	founding:
+		API\V'\MODULE\MAIN\SERVICE\SECURITY\LISTENER\:
+		
+		1. SessionAuthenctiocationListener
+		2. AuthenticationListener.php
+		3. AnonymousAuthencticationListenr.php
+		
+		
+
+use Enigma\Library\Security\Token\Storage\TokenStorageInterface;     
+searching    $tokenStorage!
+~
+
+
+namespace Cyclonis\Api\V1\Module\Main\Service\Security\Listener;
+
+
+use Cyclonis\Api\V1\Module\Main\Service\UserSession\UserSession;
+		SessionIdGenerator.php		ADDED         use/// added
+		UserSession.php 			s				use/// added 
+
+		ADDED
+
+use Cyclonis\Api\V1\Module\Main\Service\Security\Token\SessionToken;
+use Cyclonis\Api\V1\Module\Main\Service\Security\User\User;
+
+looking for 	ListenerInterface;    4tokenStorage; $sessionAuthencticationManager; $session $userSession; $securityConfig $sessionName, $sessionKey ; $sessionFlagKey; 
+
+	 * @param	\Cyclonis\App\Module\Main\Service\Security\User\User $userSession
+	 
+	  file SessionAuthenticationManager 
+	  SessionToken!!!!! - missing;;;;;; 
+	 
+	 
+	 
+	 	$this->tokenStorage					= $tokenStorage;
+				$this->sessionAuthenticationManager	= $sessionAuthenticationManager;      ADDED!!!!   
+				$this->session						= $session;							  ADDED!!!!
+				$this->userSession					= $userSession;
+				$this->securityConfig				= $securityConfig;
+				'sessionKey'
+				'session_flag_key'
+				
+		return $this->services['anon_auth_manager']	= new AnonymousAuthenticationManager(
+				$this->get( 'anon_key_encryptor' )		
+				
+				use Enigma\Library\Security\Token\TokenInterface;
+
+
+
+2016/05/25 10:49:14 [error] 12332#0: *164 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot redeclare Cyclonis\App\Module\Main\Service\ServiceContainer\AppServiceContainer::getSessionAuthenticationListenerService() in /home/www/cyclonis.dev/source/App/Module/Main/Service/ServiceContainer/AppServiceContainer.php on line 401" while reading response header from upstream, client: 10.10.10.1, server: cyclonis.dev, request: "GET /login HTTP/1.1", upstream: "fastcgi://unix:/var/run/php-fpm/php-fpm.sock:", host: "cyclonis.dev"
+
+//questions mark = why you have the variable, plus the class inside????????? 
+				/**
+	 * @brief	Set user provider and security config
+	 * 
+	 * @param UserProviderInterface $provider
+	 * @param ConfigLoaderInterface $securityConfig
+	 */
+	public function __construct( UserProviderInterface $provider, ConfigLoaderInterface $securityConfig )
+	{
+		$this->provider			= $provider;
+		$this->securityConfig	= $securityConfig;
+	}
+				
+				
+				
+				
