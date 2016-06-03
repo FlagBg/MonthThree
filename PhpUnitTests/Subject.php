@@ -1,7 +1,8 @@
 <?php
 
 /**
- * @brief
+ * @brief	https://phpunit.de/manual/current/en/test-doubles.html#test-doubles.mock-objects
+ * 			
  * 
  * @author User
  *
