@@ -9,7 +9,7 @@
 	<label for="radioButton"></label><input type = "radio" name="sex" value = F>Female
 	<br>
 	<label for="radioButton2"></label><input type = "radio" name="OS" value = "Windows">Windows;
-	<label for ="radioButton2></label><input type = "radio" name="OS" value = "Linux">Linux;
+	<label for="radioButton2"></label><input type = "radio" name="OS" value = "Linux">Linux;
 	<label for =|radioButton2></label><input type ="radio" name="OS" value = "Mac OS">Mac;
  	<br>
  	<br>
@@ -19,7 +19,7 @@
 	
 	<select name="year" size = 1>
 		<option value=2016>2016</option>
-		<opiton value=2015>2015</opiton>
+		<option value=2015>2015</opiton>
 		<option value=2014>2014</option>
 		<option value=2013>2013</option>
 		<option value=2012>2012</option>

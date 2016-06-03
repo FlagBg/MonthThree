@@ -13,17 +13,12 @@
 
 class Test
 {
-	
-
-public function hi( $a )
+	public function hi( $a )
 	{
 		var_dump(func_get_arg(0));
 		$x++;
 	}
 	
-	$a = 1;
-	  
- 	
 }
 
 $test = new Test();
