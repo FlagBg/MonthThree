@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>Login</title>
+	<link href="{}/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.form-signin
+		{
+			max-width: 330px;
+		    padding: 15px;
+		    margin: 0 auto;
+		}
+	</style>
+</head>
+	<body>
+		<div class="constainer">
+			<div class="row">
+				<div class="form-signin">
+					<form id="login_form" action="/login" method="post" onsubmit="return false;">
+						<h2 class="form-signin-heading">Please sign in</h2>
+						<div class="form-group">
+							<label for="user_email">Email address</label>
+								<input type="text" name="user_email" class="form-control" id="user_email" placeholder="Enter email ">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Password</label>
+								<input type="password" name="user_password" class="form-control" id="user_password" placeholder="Password">
+							</div>
+							<div class="checkbox">
+								<label>
+								<input type="checkbox" id="remember_me" name="remember_me"> Remember me
+							</label>
+						</div>
+						<button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+					</form>
+					<a href="/download_app" class="btn btn-lg btn-success btn-block">Download</a>
+				</div>
+			</div>
+		</div>
+		<script src="{{}}/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript">
+		
+		//http://stackoverflow.com/questions/46155/validate-email-address-in-javascript using RFC22 regular expressions for emails:
+			/* 	function check_email( val )
+				{
+					if( !val.match( ^((?>[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+\x20*|"((?=[\x01-\x7f])[^"\\]|\\[\x01-\x7f])*
+			                      "\x20*)*(?<angle><))?((?!\.)(?>\.?[a-zA-Z\d!#$%&'*+\-/=?^_`{|}~]+)+|"((?=[\x01-\x
+                                  7f])[^"\\]|\\[\x01-\x7f])*")@(((?!-)[a-zA-Z\d\-]+(?<!-)\.)+[a-zA-Z]{2,}|\[(((?(?<
+                                   !\[)\.)(25[0-5]|2[0-4]\d|[01]?\d?\d)){4}|[a-zA-Z\d\-]*[a-zA-Z\d]:((?=[\x01-\x7f])
+                                   [^\\\[\]]|\\[\x01-\x7f])+)\])(?(angle)>)$ ) )
+						{
+							console.log(i am in false mode)
+							return false;						
+						}
+					if( val.indexOf( ' ')!=-1 || val.indexOf('..' )!=-1 )
+						{
+							//do something
+							return false
+						}
+					return true;
+				}
+		 */
+		
+			function loginValidator()
+			{
+				this.validate = function( login_Form )
+				{
+					isValid = true;
+					
+					if ( ! this.validateEmail( $( loginForm + ' #user_email').val() )  )
+					{
+						isValid = false;
+						console.log("try again");
+						//var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+					}
+					
+					if ( isValid )
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				},
+				
+				this.validateEmail = function( emailValue )
+				{
+					console.log(emailValue);
+					
+					return false;
+				}
+			}
+			
+			loginValidator = new loginValidator();
+			
+			$( document ).ready( function() {
+				$('#login_form').submit( function( event ) {
+					return loginValidator.validate( this );
+				});
+			}); 
+			
+			
+		</script>
+	</body>
+</html>
