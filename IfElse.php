@@ -1,7 +1,7 @@
 <?php
 
 
-
+ini_set( 'display_errors', 'On' );
 
 /**
  * 
@@ -262,4 +262,4 @@ class X
 
 $x = new X();
 //$x->setAge($age);
-$x->specialKK( asdfasdf );
+$x->specialKK( jj );
