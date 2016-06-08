@@ -30,25 +30,11 @@ if( !isset( $_SESSION[username]))
 				echo "Hello, $_SESSION[username] || 
 					<a href = session.php?action=logout>Logout</a>";
 			}
-				else //wrong pass
+			else
+			{//wrong pass
 				echo "Not Allowed";
+			}
 		}
-		}		
-		else 
-		{
-			//user Logged
-			echo "Hello, $_SESSION[username] || 
-					<a href=session.php?action=logout>Logout</a>";
-		} //if logout is pressed 
-		if ( $isset( $_GET[action] ))
-			if( $_GET[action] === "logout")
-			{//unset session
-				unset($_SESSION[username]);
-				//shows logout and exit;
-			echo "<form action = session.php method=post>
-					Login: <input type = text name=user>
-					Password: <input type=password name = pass>
-					<input type = submit value = OK></form>";
-		}
-?>
+	
+
 	

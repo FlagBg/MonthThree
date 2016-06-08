@@ -47,6 +47,45 @@ class X
 		}
 	}
 	
+	/**
+	 * @brief	function that is checking is a string
+	 */
+	public function specialKeyValidate()
+	{
+	
+		$age = is_int($this->age) && !isset($age) ? $this->age : "Not a number";
+	
+		if (!isset($age))
+		{
+	
+			if ( $age < 15 )
+			{
+				print "Your age is less than 15";
+			}
+	
+			elseif ( $age == $age1)
+			{
+				print "Priravnyavane";
+			}
+			 
+			else
+			{
+				print "Hi";
+			}
+			 
+		}
+		else
+		{
+			print "This value has not been set.";
+		}
+	}
+
+	
+	/**
+	 * @brief	other function for if/else function
+	 * 
+	 * @param	int $ageThree
+	 */
 	public function specialK( $ageThree )
 	{
 		if ( $age < 15 )
@@ -180,19 +219,43 @@ class X
 		}
 	}
 
+	/**
+	 * @brief	setter
+	 * 
+	 * @param int $age
+	 */
 	public function setAge( $age )
 	{
 		return $this->age;
 	}
 	
+	/**
+	 * @brief
+	 * 
+	 * @param string $name
+	 */
 	public function setName( $name )
 	{
 		return $this->name;
 	}
 	
+	/**
+	 * @brief	getter
+	 */
 	public function getAge()
 	{
 		return $this->age;
+	}
+	
+	/**
+	 * @brief	theOtherWay of if/else statement; 
+	 */
+	public function otherIf()
+	{
+		$var = TRUE;
+		echo $var==TRUE ? 'TRUE' : 'FALSE'; // get TRUE
+		echo $var==FALSE ? 'TRUE' : 'FALSE'; // get FALSE
+		
 	}
 	
 }

@@ -1,6 +1,7 @@
 <?php
 
-public function getMenu()
+
+function getMenu()
 {
-	print "hi";
+	echo "fasd";
 }
