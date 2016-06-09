@@ -2,6 +2,7 @@
 
 ini_set( 'display_errors', 'On' );
 
+include_once 'DatabasePDO.php';
 /**
  * @brief	creating class that represents the user; 
  * @author User
@@ -9,6 +10,26 @@ ini_set( 'display_errors', 'On' );
  */
 class User
 {
+	/**
+	 * @var	pdo $dbo
+	 */
+	protected $db;
+	
+	/**
+	 * @var void	$sql
+	 */
+	protected $sql = "SELECT * FROM users";
+	
+	/**
+	 * @brief	default constructor that is creating the connection with the database;
+	 *
+	 * @return	$this->db;
+	 */
+	public function __construct()
+	{
+		$this->db = DatabasePDO::getInstance();
+	}
+	
 	/**
 	 * @brief	get The fullname;
 	 * 
@@ -23,16 +44,27 @@ class User
 		return "{$this->first_name} {$this->last_name}";
 	}
 	
+	public function testData()
+	{
+		$users = $this->db->query( $this->sql );
+		
+		//usersFetchMode( and Inside Fetch as a Class named 'User' )
+		//$users->setFetchMode( PDO::FETCH_CLASS, 'USER');
+		$users->setFetchMode( PDO::FETCH_CLASS, 'User');
+		
+		while ( $a = $user = $users->fetch() )
+		{var_dump( $a );die('here');
+			echo $user->getFullName() . '<br>';
+		}
+		
+	}
 	//
 }
+$test = new User();
+$test->testData();die;
 
-$db = new PDO('mysql:host=127.0.0.1; dbname=pdo', 'root', '' );
 
-$users = $db->query( "
-	SELECT * FROM users
-	" );
-//usersFetchMode( and Inside Fetch as a Class named 'User' )
-$users->setFetchMode( PDO::FETCH_CLASS, 'USER');
+
 
 //getting rid of that line here and than i want to print all the datas in the db;
 //$users = $users->fetch();
@@ -40,10 +72,10 @@ $users->setFetchMode( PDO::FETCH_CLASS, 'USER');
 //echo '<pre>', var_dump( $users->email ) , '</pre>';
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-while ( $user = $users->fetch() )
-{	//we can see two emails now in here;
-	echo $user->getFullName(), '<br>' ;
-}
+//while ( $user = $users->fetch() )
+//{	//we can see two emails now in here;
+//	echo $user->getFullName(), '<br>' ;
+//}
 
 ?>
 
