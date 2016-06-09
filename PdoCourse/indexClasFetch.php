@@ -40,7 +40,7 @@ class User
 	 * @return	string
 	 */
 	public function getFullName()
-	{
+	{//here $this is the same like $user in the WHILE LOOP.
 		return "{$this->first_name} {$this->last_name}";
 	}
 	
@@ -52,8 +52,9 @@ class User
 		//$users->setFetchMode( PDO::FETCH_CLASS, 'USER');
 		$users->setFetchMode( PDO::FETCH_CLASS, 'User');
 		
-		while ( $a = $user = $users->fetch() )
-		{var_dump( $a );die('here');
+		//while because we are working with the class. 
+		while ( $user = $users->fetch() )
+		{//var_dump( $user->email );//die('here');
 			echo $user->getFullName() . '<br>';
 		}
 		
@@ -61,13 +62,7 @@ class User
 	//
 }
 $test = new User();
-$test->testData();die;
-
-
-
-
-//getting rid of that line here and than i want to print all the datas in the db;
-//$users = $users->fetch();
+$test->testData();
 
 //echo '<pre>', var_dump( $users->email ) , '</pre>';
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
