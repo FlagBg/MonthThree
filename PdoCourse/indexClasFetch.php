@@ -42,6 +42,7 @@ class User
 	public function getFullName()
 	{//here $this is the same like $user in the WHILE LOOP.
 		return "{$this->first_name} {$this->last_name}";
+		
 	}
 	
 	public function testData()
@@ -54,7 +55,7 @@ class User
 		
 		//while because we are working with the class. 
 		while ( $user = $users->fetch() )
-		{//var_dump( $user->email );//die('here');
+		{//var_dump( $user->email );//die('here')than the function
 			echo $user->getFullName() . '<br>';
 		}
 		

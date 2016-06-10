@@ -18,7 +18,7 @@ echo $users->fetchObject()->count;
 class RowCount
 {
 	
-	
+	protected $userID = (INT)$_GET['user'];	
 	
 	
 	
@@ -26,3 +26,6 @@ class RowCount
 	
 	
 }
+
+
+

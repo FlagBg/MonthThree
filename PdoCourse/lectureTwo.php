@@ -17,6 +17,13 @@ class LectureTwo
 	protected $sql = "SELECT * FROM users";
 	
 	/**
+	 * var	array	$date;//created as a key from the database;
+	 */
+	protected $dates = [
+			'created'
+	];
+	
+	/**
 	 * @brief	default constructor that is creating the connection with the database;
 	 * 
 	 * @return	$this->db;
@@ -24,9 +31,29 @@ class LectureTwo
 	public function __construct()
 	{
 		$this->db = DatabasePDO::getInstance();
+		//$this->created = "never";//if we write like this we are changing in the object the date;
+		//the second option is creating new Object as a Date;
+		//$this->created = new DateTime( $this->created ); When we var_dump this we have CREATED as @author User
+		//object with object(DateTime)[6]
+		//public 'date' => string '2016-06-09 15:42:40.000000' (length=26)
+		//public 'timezone_type' => int 3
+		//public 'timezone' => string 'Europe/Berlin' (length=13) i did initiliaze that from the 
+		// testData function 
+		/*this bit is for the testData() function;
+		foreach ( $this->dates as $date )
+		{	//$this->{$date}=$protected $dates;
+			$property = $this->{$date};
+			$this->{$date} = new DateTime( $property);
+		}
+		/*
 	}
 	
+	/* public function __construct()
+	{
+		var_dump($this->created = never );
+	} */
 	
+	}
 	/**
 	 * @brief	our task is to create a basic query and to explore how it works and etc;
 	 * 			
@@ -36,6 +63,7 @@ class LectureTwo
 	 * 
 	 * @return	pdo succsessful response;		
 	 */
+	
 	public function createBasicQuery()
 	{	
 		$sql = "UPDATE users SET last_name='Bayraktarov' WHERE Id=1";	
@@ -205,13 +233,96 @@ class LectureTwo
 	
 	<?php 	
 	}
+
+	/*
+	 * @brief	rowCountMethod for an objjt;
+	 */
+	public function rowCount()
+	{
+		$usersQuery = $this->db->query( $this->sql );
+	
+		$users = $usersQuery->fetchAll( PDO::FETCH_OBJ );
+	
+		echo "There are " . $usersQuery->rowCount() . " registered users. ";
+	
+		foreach ( $users as $user )
+		{
+			echo "User's email is: " . $user->email . " " ;
+		}
+	
+	}
+	
+	
+	/**
+	 * @brief	get The fullname;
+	 *
+	 * @param	string $first_name
+	 *
+	 * @param	string $last_name
+	 *
+	 * @return	string
+	 */
+	public function getFullName()
+	{//here $this is the same like $user in the WHILE LOOP.
+	return "{$this->first_name} {$this->last_name}";
+	
+	}
+	
+	/**
+	 * @brief	did the connection and the query, setFetchMode to the Class
+	 * 			while we fetch/$users->fetch()which shows all the rows in the DB.
+	 * 			triggering any key[] from the DB, for example $user->created;
+	 * 			option next put variable to the whole class called $protected date;
+	 * 
+	 * param	date	$date
+	 * 
+	 * @param	array	$user
+	 */
+	public function testData()
+	{
+		$users = $this->db->query( $this->sql );
+	
+		//usersFetchMode( and Inside Fetch as a Class named 'User' )
+		//$users->setFetchMode( PDO::FETCH_CLASS, 'USER');
+		$users->setFetchMode( PDO::FETCH_CLASS, 'LectureTwo');
+	
+		//while because we are working with the class.
+		
+		
+		while ( $user = $users->fetch() )
+		var_dump( $user );
+		//var_dump( $users->fetch() );// die('asdf');
+		{//var_dump( $user->email );//die('here')than the function
+			//echo $user->getFullName() . '<br>';
+			//var_dump( $user->created );
+			echo "Registered on " . $user->created->geTimestamp();
+			//var_dump($user);//fetch all as array/ 
+		} 
+		//have a look at indexClassUser where is created the working way;
+	}
+	
+	
+	public function showTimeStampI()
+	{
+		$users = $this->db->query( $this->sql );
+		//setFetchMode to the specific Class/
+		$users->setFetchMode( PDO::FETCH_CLASS, 'LectureTwo');
+		
+		while ( $user = $users->fetch() )
+		{
+			echo $user->getFullName() . '<br>';
+			
+		}
+	}
 	
 }
 $lectureTwo = new LectureTwo();
-//$lectureTwo->createBasicQuery();//edit the user where id = ?
-//$lectureTwo->fetchAllUsers();//setting up to show all users;
-//$lectureTwo->showUsersUsingFetchObject();//set up to show the email;
-//$lectureTwo->showUserFetchAssoc();//set up to show the email using [];
-//$lectureTwo->createBasicQuery();
+$lectureTwo->showTimeStampI();
+$lectureTwo->createBasicQuery();//edit the user where id = ?
+$lectureTwo->fetchAllUsers();//setting up to show all users;
+$lectureTwo->showUsersUsingFetchObject();//set up to show the email;
+$lectureTwo->showUserFetchAssoc();//set up to show the email using [];
+$lectureTwo->createBasicQuery();
 //$lectureTwo->whileLoopFetchObjectsUsers();//using the html tag and printing the fetchObjects;
 $lectureTwo->tryCatchFetchAllHtml();
+//$lectureTwo->testData();//execute testData which calls the getFullName;

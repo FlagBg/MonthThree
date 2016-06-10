@@ -16,7 +16,7 @@ class User
 	public function __construct()
 	{//so we var_dump this one is our class, but we fetching our class underneath 
 		//so it prints the object; second option is to print the other part as print ="NEVER"
-		var_dump( $this->created = 'NEVER');
+		//var_dump( $this->created = 'NEVER');
 		//try $this __Class__ $this->user etc.
 	}
 	
