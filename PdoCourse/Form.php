@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 	if ( isset($_POST['something'], $_POST['something_else']) )
 	{
 		$something 		= $_POST['something'];
@@ -25,19 +21,14 @@
 		{
 			$email	= mysql_query;
 		}
-	
-	
-	
-	
-		$something 		= $_POST['something'];
-		$something_else = $_POST['something_else'];
-	
-		$users =1 ;
-		echo $something , " " , $something_else;
+
+	$something 		= $_POST['something'];
+	$something_else = $_POST['something_else'];
+
+	$users =1 ;
+	echo $something , " " , $something_else;
 	
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">

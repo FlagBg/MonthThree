@@ -5,7 +5,6 @@ ini_set( 'display_errors', 'On' );
 /**
  * @brief	creating class that represents the user;
  * @author User
- *
  */
 class User
 {
