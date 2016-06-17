@@ -65,7 +65,7 @@ class LectureTwo
 	 */
 	
 	public function createBasicQuery()
-	{	
+	{	echo phpinfo();
 		$sql = "UPDATE users SET last_name='Bayraktarov' WHERE Id=1";	
 		
 		$this->db->query( $sql );

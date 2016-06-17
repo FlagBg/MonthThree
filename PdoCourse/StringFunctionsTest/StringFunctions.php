@@ -30,7 +30,7 @@ class StringFunctions
 		}
 		else
 		{
-			print "The length is ok.  ";
+			print "The length is ok.  ";  
 		}
 			
 	}
@@ -90,7 +90,7 @@ class StringFunctions
 	 * 			that is a good syntax that is example for the future;
 	 * 
 	 *  @param	string $name
-	 *  @param	string $body
+	 * 	 @param	string $body
 	 *  
 	 *  @return	string $body	
 	 *  
