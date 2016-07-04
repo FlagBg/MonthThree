@@ -1,6 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>UndefinedIndex</title>
+	</head>
+	<body>
+		<form action = "" method ="post">
+		Type:
+			<input type="text" name="something" />
+			<input type="text" name="something_else" />
+			<input type="password" name = "password" />
+			<input type="submit" value="Submit" />
+		</form>
+	</body>
+</html>
+
 <?php
 
-	if ( isset($_POST['something'], $_POST['something_else']) )
+	if ( isset( $_POST['something'], $_POST['something_else'] ) )
 	{
 		$something 		= $_POST['something'];
 		$something_else = $_POST['something_else'];
@@ -26,22 +43,8 @@
 	$something_else = $_POST['something_else'];
 
 	$users =1 ;
+	
 	echo $something , " " , $something_else;
 	
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>UndefinedIndex</title>
-	</head>
-	<body>
-		<form action = "" method ="post">
-		Type:
-			<input type="text" name="something" />
-			<input type="text" name="something_else" />
-			<input type="submit" value="Submit" />
-		</form>
-	</body>
-</html>
+	?>
+	
